@@ -8,13 +8,15 @@ import {
   CircularProgress,
   TextField,
   Typography,
+  InputAdornment,
+  IconButton,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 import useSignUp from "@/app/portal/login/components/LoginService/useSinup";
 import SignUp from "@/app/portal/login/components/SinUp";
 import LoginPopup from "@/app/common/components/LoginForm";
 import CustomTypography from "@/app/common/components/CustomTypography";
-
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 const LoginPage = () => {
   const [formData, setFormData] = useState({
     fullName: "",
@@ -51,7 +53,11 @@ const LoginPage = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+  const [showPassword, setShowPassword] = useState(false);
 
+  const handleTogglePassword = () => {
+    setShowPassword((prev) => !prev);
+  };
   return (
     <Container
       maxWidth="sm"
@@ -105,10 +111,20 @@ const LoginPage = () => {
               <TextField
                 fullWidth
                 variant="outlined"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
+                InputProps={{
+                  style: { backgroundColor: " #E8EFFB " },
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton onClick={handleTogglePassword} edge="end">
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
               />
 
               <Box
@@ -128,7 +144,7 @@ const LoginPage = () => {
                   sx={{
                     fontSize: { xs: "0.9rem", sm: "1rem" },
                     backgroundColor: "#F3D1B4",
-                    color:'black'
+                    color: "black",
                   }}
                 >
                   {loading ? (
