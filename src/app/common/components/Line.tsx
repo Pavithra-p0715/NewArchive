@@ -1,7 +1,7 @@
 import { Divider } from "@mui/material";
 
 interface LineProps {
-  sx?: object; 
+  sx?: object;
 }
 
 const Line: React.FC<LineProps> = ({ sx = {} }) => {

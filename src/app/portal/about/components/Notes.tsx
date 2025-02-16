@@ -1,15 +1,7 @@
 "use client";
 
 import React from "react";
-import {
-  Typography,
-  TextField,
-  Button,
-  Box,
-  Modal,
-  Divider,
-  IconButton,
-} from "@mui/material";
+import { TextField, Button, Box, Modal, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { NotesProps } from "@/app/portal/about/interface/interface";
 import CustomTypography from "@/app/common/components/CustomTypography";
@@ -23,7 +15,7 @@ const Notes: React.FC<NotesProps> = ({
   onAdd,
   isEditing,
   onSave,
-  onDelete
+  onDelete,
 }) => {
   return (
     <Modal

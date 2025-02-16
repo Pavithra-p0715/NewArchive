@@ -65,8 +65,8 @@ const Header: React.FC<IHeaderProps> = ({
   };
 
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm")); 
-  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md")); 
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
 
   return (
     <>

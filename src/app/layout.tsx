@@ -19,7 +19,9 @@ export default function RootLayout({
           <AppBar position="static" sx={{ backgroundColor: "#568D94" }}>
             <Header title="Keep Notes" menuItems={menuItems} />
           </AppBar>
-          <Box sx={{ backgroundColor: "#F4F2DE",minHeight:'100vh' }}>{children}</Box>
+          <Box sx={{ backgroundColor: "#F4F2DE", minHeight: "100vh" }}>
+            {children}
+          </Box>
         </body>
       </html>
     </>

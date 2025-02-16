@@ -1,15 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import {
-  Container,
-  Box,
-  Paper,
-  Typography,
-  IconButton,
-  Snackbar,
-  Alert,
-} from "@mui/material";
+import { Container, Box, Typography, Snackbar, Alert } from "@mui/material";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import useNotes from "@/app/portal/about/components/AboutService/useAboutAction";
 import Notes from "@/app/portal/about/components/Notes";

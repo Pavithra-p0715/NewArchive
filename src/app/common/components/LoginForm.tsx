@@ -54,7 +54,6 @@ const LoginPopup: React.FC<LoginPopupProps> = ({
               <IconButton onClick={() => onEditOpen?.()}>
                 <EditIcon fontSize="small" />
               </IconButton>
-              
             </>
           )}
         </Box>
