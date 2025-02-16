@@ -12,6 +12,8 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { NotesProps } from "@/app/portal/about/interface/interface";
+import CustomTypography from "@/app/common/components/CustomTypography";
+import Line from "@/app/common/components/Line";
 
 const Notes: React.FC<NotesProps> = ({
   open,
@@ -30,11 +32,12 @@ const Notes: React.FC<NotesProps> = ({
     >
       <Box
         sx={{
-          backgroundColor: "white",
+          // backgroundColor: "white",
           padding: 4,
           borderRadius: 2,
           boxShadow: 5,
           minWidth: "50vw",
+          backgroundColor: "#F4F2DE",
         }}
       >
         <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
@@ -45,28 +48,40 @@ const Notes: React.FC<NotesProps> = ({
               alignItems: "center",
             }}
           >
-            <Typography variant="h4" color="primary" fontWeight="bold">
-              {isEditing ? "Edit Note" : "Add Note"}
-            </Typography>
+            <CustomTypography
+              text={isEditing ? "Edit Note" : "Add Note"}
+              sx={{ color: "#8B4513", fontWeight: "bold" }}
+            />
             <IconButton onClick={onClose}>
               <CloseIcon />
             </IconButton>
           </Box>
-          <Divider />
+          <Line
+            sx={{ borderColor: "#8B4513", borderWidth: "2px", marginY: 2 }}
+          />
+
           {isEditing ? (
             ""
           ) : (
+            <>
+             <CustomTypography
+              text={"Title"}
+              sx={{ color: "#8B4513", fontWeight: "bold" }}
+            />
             <TextField
               fullWidth
-              label="Title"
               variant="outlined"
               value={value.title}
               onChange={(e) => onValueChange("title", e.target.value)}
             />
-          )}
+         </> )}
+             <CustomTypography
+              text={"Write your note..."}
+              sx={{ color: "#8B4513", fontWeight: "bold" }}
+            />
           <TextField
             fullWidth
-            label="Write your note..."
+            
             multiline
             rows={4}
             variant="outlined"
@@ -85,7 +100,7 @@ const Notes: React.FC<NotesProps> = ({
                   Delete
                 </Button>
               </>
-            ) : (
+            ) : (<>
               <>
                 <Button variant="contained" color="success" onClick={onAdd}>
                   Add
@@ -94,7 +109,7 @@ const Notes: React.FC<NotesProps> = ({
                   Cancel
                 </Button>
               </>
-            )}
+           </> )}
           </Box>
         </Box>
       </Box>

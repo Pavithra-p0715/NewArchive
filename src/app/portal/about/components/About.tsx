@@ -11,13 +11,13 @@ import {
   Alert,
 } from "@mui/material";
 import AssignmentIcon from "@mui/icons-material/Assignment";
-import EditIcon from "@mui/icons-material/Edit";
 import useNotes from "@/app/portal/about/components/AboutService/useAboutAction";
 import Notes from "@/app/portal/about/components/Notes";
 import { State } from "@/app/portal/about/interface/interface";
+import LoginPopup from "@/app/common/components/LoginForm";
+import CustomTypography from "@/app/common/components/CustomTypography";
 
-  const About = () => {
-
+const About = () => {
   const [state, setState] = useState<State>({
     notes: [],
     open: false,
@@ -68,52 +68,20 @@ import { State } from "@/app/portal/about/interface/interface";
           {user ? `Good Morning: ${user.email}` : "Guest User"}
         </Typography>
         {state.notes.length > 0 ? (
-          <Box
-            sx={{
-              height: "50vh",
-              width: "50vh",
-              overflowY: "auto",
-              padding: 2,
-              border: "1px solid #ccc",
-              borderRadius: 2,
-              backgroundColor: "#f9f9f9",
-            }}
-          >
+          <Box>
             {state.notes.map((note, index) => (
-              <Paper
-                key={index}
-                elevation={3}
-                sx={{
-                  padding: 2,
-                  marginBottom: 2,
-                  backgroundColor: "#fff",
-                  borderRadius: 2,
-                  position: "relative",
-                }}
+              <LoginPopup
+                title={note.title}
+                isEdit={true}
+                onEditOpen={() => handleEditNote(index)}
+                onDelete={handleDeleteNote}
               >
-                <Typography
-                  variant="h6"
-                  fontWeight="bold"
-                  sx={{ color: "#333" }}
-                >
-                  {note.title}
-                </Typography>
-                <Typography variant="body1" sx={{ color: "#555" }}>
-                  {note.content}
-                </Typography>
-                <Typography
-                  variant="caption"
-                  sx={{ display: "block", marginTop: 1, color: "#888" }}
-                >
-                  Created on: {note.createdAt}
-                </Typography>
-                <IconButton
-                  sx={{ position: "absolute", top: 8, right: 8 }}
-                  onClick={() => handleEditNote(index)}
-                >
-                  <EditIcon fontSize="small" />
-                </IconButton>
-              </Paper>
+                <CustomTypography text={note.content} sx={{ color: "##555" }} />
+                <CustomTypography
+                  sx={{ display: "block", marginTop: 1, color: "#555" }}
+                  text={`Created on: ${note.createdAt}`}
+                />
+              </LoginPopup>
             ))}
           </Box>
         ) : (
@@ -124,7 +92,7 @@ import { State } from "@/app/portal/about/interface/interface";
             position: "fixed",
             bottom: 16,
             right: 16,
-            backgroundColor: "white",
+            backgroundColor: "#E6B89C",
             borderRadius: "50%",
             boxShadow: 3,
             p: 1,
@@ -132,7 +100,7 @@ import { State } from "@/app/portal/about/interface/interface";
           }}
           onClick={resetNote}
         >
-          <AssignmentIcon sx={{ fontSize: 40, color: "primary.main" }} />
+          <AssignmentIcon sx={{ fontSize: 40, color: "#FFF" }} />
         </Box>
 
         <Notes
@@ -160,6 +128,6 @@ import { State } from "@/app/portal/about/interface/interface";
       </Container>
     </>
   );
-}
+};
 
 export default About;

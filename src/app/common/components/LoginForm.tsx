@@ -1,13 +1,17 @@
 import React from "react";
-import { Paper, Typography, Alert, Box } from "@mui/material";
+import { Paper, Typography, Alert, Box, IconButton } from "@mui/material";
 import CustomTypography from "./CustomTypography";
 import Line from "./Line";
-
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 interface LoginPopupProps {
   title: string;
   error?: string | null;
   message?: string;
   children: React.ReactNode;
+  isEdit?: boolean;
+  onEditOpen?: () => void;
+  onDelete?: () => void;
 }
 
 const LoginPopup: React.FC<LoginPopupProps> = ({
@@ -15,6 +19,9 @@ const LoginPopup: React.FC<LoginPopupProps> = ({
   error,
   message,
   children,
+  isEdit = false,
+  onEditOpen,
+  onDelete,
 }) => {
   return (
     <Paper
@@ -28,7 +35,35 @@ const LoginPopup: React.FC<LoginPopupProps> = ({
         borderRadius: "8px",
       }}
     >
-      <CustomTypography text={title} />
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <CustomTypography text={title} />
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "flex-end",
+            gap: 1,
+          }}
+        >
+          {isEdit && (
+            <>
+              <IconButton onClick={() => onEditOpen?.()}>
+                <EditIcon fontSize="small" />
+              </IconButton>
+              <IconButton onClick={onDelete}>
+                <DeleteIcon fontSize="small" />
+              </IconButton>
+            </>
+          )}
+        </Box>
+      </Box>
+
       <Line sx={{ borderColor: "#8B4513", borderWidth: "2px", marginY: 2 }} />
 
       {error && <Alert severity="error">{error}</Alert>}
