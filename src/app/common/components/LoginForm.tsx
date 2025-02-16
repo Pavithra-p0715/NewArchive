@@ -11,7 +11,6 @@ interface LoginPopupProps {
   children: React.ReactNode;
   isEdit?: boolean;
   onEditOpen?: () => void;
-  onDelete?: () => void;
 }
 
 const LoginPopup: React.FC<LoginPopupProps> = ({
@@ -21,7 +20,6 @@ const LoginPopup: React.FC<LoginPopupProps> = ({
   children,
   isEdit = false,
   onEditOpen,
-  onDelete,
 }) => {
   return (
     <Paper
@@ -56,9 +54,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({
               <IconButton onClick={() => onEditOpen?.()}>
                 <EditIcon fontSize="small" />
               </IconButton>
-              <IconButton onClick={onDelete}>
-                <DeleteIcon fontSize="small" />
-              </IconButton>
+              
             </>
           )}
         </Box>

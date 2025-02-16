@@ -23,7 +23,7 @@ const Notes: React.FC<NotesProps> = ({
   onAdd,
   isEditing,
   onSave,
-  onDelete,
+  onDelete
 }) => {
   return (
     <Modal
@@ -64,24 +64,24 @@ const Notes: React.FC<NotesProps> = ({
             ""
           ) : (
             <>
-             <CustomTypography
-              text={"Title"}
-              sx={{ color: "#8B4513", fontWeight: "bold" }}
-            />
-            <TextField
-              fullWidth
-              variant="outlined"
-              value={value.title}
-              onChange={(e) => onValueChange("title", e.target.value)}
-            />
-         </> )}
-             <CustomTypography
-              text={"Write your note..."}
-              sx={{ color: "#8B4513", fontWeight: "bold" }}
-            />
+              <CustomTypography
+                text={"Title"}
+                sx={{ color: "#8B4513", fontWeight: "bold" }}
+              />
+              <TextField
+                fullWidth
+                variant="outlined"
+                value={value.title}
+                onChange={(e) => onValueChange("title", e.target.value)}
+              />
+            </>
+          )}
+          <CustomTypography
+            text={"Write your note..."}
+            sx={{ color: "#8B4513", fontWeight: "bold" }}
+          />
           <TextField
             fullWidth
-            
             multiline
             rows={4}
             variant="outlined"
@@ -100,16 +100,18 @@ const Notes: React.FC<NotesProps> = ({
                   Delete
                 </Button>
               </>
-            ) : (<>
+            ) : (
               <>
-                <Button variant="contained" color="success" onClick={onAdd}>
-                  Add
-                </Button>
-                <Button variant="contained" color="error" onClick={onClose}>
-                  Cancel
-                </Button>
+                <>
+                  <Button variant="contained" color="success" onClick={onAdd}>
+                    Add
+                  </Button>
+                  <Button variant="contained" color="error" onClick={onClose}>
+                    Cancel
+                  </Button>
+                </>
               </>
-           </> )}
+            )}
           </Box>
         </Box>
       </Box>

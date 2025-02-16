@@ -71,10 +71,10 @@ const About = () => {
           <Box>
             {state.notes.map((note, index) => (
               <LoginPopup
+                key={note.title || index}
                 title={note.title}
                 isEdit={true}
                 onEditOpen={() => handleEditNote(index)}
-                onDelete={handleDeleteNote}
               >
                 <CustomTypography text={note.content} sx={{ color: "##555" }} />
                 <CustomTypography
@@ -111,7 +111,7 @@ const About = () => {
           onAdd={handleAddNote}
           isEditing={state.isEditing}
           onSave={handleSaveNote}
-          onDelete={handleDeleteNote}
+          onDelete={() => handleDeleteNote()}
         />
 
         <Snackbar
