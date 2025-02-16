@@ -4,21 +4,21 @@
     "key": "about",
     "label": "About",
     "active": false,
-    "path": "/"
+    "path": "/portal/about"
   },
   {
     "id": 2,
     "key": "notes",
     "label": "Notes",
     "active": false,
-    "path": "/"
+    "path": "/portal/notes"
   },
   {
     "id": 3,
     "key": "accounts",
     "label": "Accounts",
     "active": false,
-    "path": "/",
+    "path": "/portal/accounts",
     "name": "Your Accounts"
   },
   {

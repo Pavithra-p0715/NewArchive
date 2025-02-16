@@ -4,15 +4,16 @@ import { useState } from "react";
 import {
   Button,
   Container,
-  Paper,
-  Typography,
   Box,
   CircularProgress,
   TextField,
+  Typography,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 import useSignUp from "@/app/portal/login/components/LoginService/useSinup";
 import SignUp from "@/app/portal/login/components/SinUp";
+import LoginPopup from "@/app/common/components/LoginForm";
+import CustomTypography from "@/app/common/components/CustomTypography";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -21,6 +22,7 @@ const LoginPage = () => {
     password: "",
     confirmPassword: "",
   });
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string>("");
@@ -29,13 +31,20 @@ const LoginPage = () => {
 
   const { handleRegister, handleLogin } = useSignUp();
 
-  const handleRegisterWrapper = (e: React.FormEvent) => {
+  const handleLoginWrapper = async (e: React.FormEvent) => {
     e.preventDefault();
-    handleRegister(e, formData, setError, setMessage, setShowSignUp);
-  };
+    console.log("Logging in with:", {
+      email: formData.email,
+      password: formData.password,
+    });
 
-  const handleLoginWrapper = (e: React.FormEvent) => {
-    handleLogin(e, formData, setLoading, setError, router);
+    await handleLogin(
+      e,
+      { email: formData.email, password: formData.password },
+      setLoading,
+      setError,
+      router
+    );
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,97 +71,92 @@ const LoginPage = () => {
           setError={setError}
           message={message}
           setMessage={setMessage}
-          handleRegister={handleRegisterWrapper}
+          handleRegister={handleRegister}
           setShowSignUp={setShowSignUp}
         />
       ) : (
-        <Paper
-          elevation={3}
-          sx={{
-            width: "100%",
-            maxWidth: { xs: 320, sm: 400, md: 450 },
-            padding: { xs: 3, sm: 4, md: 5 },
-            textAlign: "center",
-            display: "flex",
-            flexDirection: "column",
-            gap: 2,
-          }}
-        >
-          <Typography variant="h5">Login</Typography>
-
-          {error && (
-            <Typography color="error" sx={{ mb: 1 }}>
-              {error}
-            </Typography>
-          )}
-
-          {message && (
-            <Typography color="success" sx={{ mb: 1 }}>
-              {message}
-            </Typography>
-          )}
-
-          <Box
-            component="form"
-            onSubmit={handleLoginWrapper}
-            sx={{ display: "flex", flexDirection: "column", gap: 2 }}
-          >
-            <TextField
-              fullWidth
-              label="Email"
-              variant="outlined"
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-            <TextField
-              fullWidth
-              label="Password"
-              variant="outlined"
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
+        <LoginPopup title="Login" error={error} message={message}>
+          <Box sx={{ px: 4 }}>
+            <CustomTypography
+              text="Login"
+              sx={{ color: "#8B4513", textAlign: "center" }}
+              variant="h2"
             />
 
             <Box
+              component="form"
+              onSubmit={handleLoginWrapper}
               sx={{
                 display: "flex",
-                flexDirection: { xs: "column", sm: "row" },
+                flexDirection: "column",
                 gap: 2,
               }}
             >
-              <Button
-                type="submit"
+              <CustomTypography text="Email" />
+              <TextField
                 fullWidth
-                variant="contained"
-                color="primary"
-                disabled={loading}
-                sx={{ fontSize: { xs: "0.9rem", sm: "1rem" } }}
-              >
-                {loading ? (
-                  <CircularProgress size={24} color="inherit" />
-                ) : (
-                  "Login"
-                )}
-              </Button>
-              <Button
+                variant="outlined"
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+              />
+              <CustomTypography text="Password" />
+              <TextField
                 fullWidth
-                variant="contained"
-                color="secondary"
-                onClick={() => setShowSignUp(true)}
-                sx={{ fontSize: { xs: "0.9rem", sm: "1rem" } }}
+                variant="outlined"
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+              />
+
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: { xs: "column", sm: "row" },
+                  gap: 2,
+                  px: 2,
+                }}
               >
-                Register
-              </Button>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  disabled={loading}
+                  sx={{
+                    fontSize: { xs: "0.9rem", sm: "1rem" },
+                    backgroundColor: "#F3D1B4",
+                    color:'black'
+                  }}
+                >
+                  {loading ? (
+                    <CircularProgress size={24} color="inherit" />
+                  ) : (
+                    "Login"
+                  )}
+                </Button>
+
+                <Button
+                  fullWidth
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => setShowSignUp(true)}
+                  sx={{
+                    fontSize: { xs: "0.9rem", sm: "1rem" },
+                    backgroundColor: "#568D94",
+                  }}
+                >
+                  Register
+                </Button>
+              </Box>
             </Box>
           </Box>
-        </Paper>
+        </LoginPopup>
       )}
     </Container>
   );
 };
+
 export default LoginPage;

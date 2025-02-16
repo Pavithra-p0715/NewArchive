@@ -9,6 +9,8 @@ import {
   Alert,
 } from "@mui/material";
 import { SignUpProps } from "@/app/portal/login/interface/interface";
+import LoginPopup from "@/app/common/components/LoginForm";
+import CustomTypography from "@/app/common/components/CustomTypography";
 
 const SignUp: React.FC<SignUpProps> = ({
   formData,
@@ -39,34 +41,33 @@ const SignUp: React.FC<SignUpProps> = ({
         minHeight: "90vh",
       }}
     >
-      <Paper
-        elevation={3}
-        sx={{ padding: 4, width: "100%", maxWidth: 400, textAlign: "center" }}
-      >
-        <Typography variant="h5" sx={{ marginBottom: 2 }}>
-          Sign Up
-        </Typography>
-
-        {error && <Alert severity="error">{error}</Alert>}
-        {message && <Alert severity="success">{message}</Alert>}
+      <LoginPopup title="Sinup" error={error} message={message}>
+        <CustomTypography
+          sx={{ textAlign: "center", color: "#8B4513" }}
+          text="Singup"
+          variant={"h2"}
+        />
 
         <Box
           component="form"
           onSubmit={handleSubmit}
           sx={{ display: "flex", flexDirection: "column", gap: 2 }}
         >
+          <CustomTypography text="UserName" />
           <TextField
             fullWidth
-            label="Full Name"
+            label=""
             variant="outlined"
             name="fullName"
             required
             value={formData.fullName}
             onChange={handleChange}
           />
+          <CustomTypography text="Email" />
+
           <TextField
             fullWidth
-            label="Email"
+            label=""
             variant="outlined"
             type="email"
             name="email"
@@ -74,9 +75,11 @@ const SignUp: React.FC<SignUpProps> = ({
             value={formData.email}
             onChange={handleChange}
           />
+          <CustomTypography text="password" />
+
           <TextField
             fullWidth
-            label="Password"
+            label=""
             variant="outlined"
             type="password"
             name="password"
@@ -84,9 +87,11 @@ const SignUp: React.FC<SignUpProps> = ({
             value={formData.password}
             onChange={handleChange}
           />
+          <CustomTypography text="ConfirmPassword" />
+
           <TextField
             fullWidth
-            label="Confirm Password"
+            label=""
             variant="outlined"
             type="password"
             name="confirmPassword"
@@ -96,20 +101,20 @@ const SignUp: React.FC<SignUpProps> = ({
           />
 
           <Box sx={{ display: "flex", gap: "8px" }}>
-            <Button type="submit" fullWidth variant="contained" color="primary">
+            <Button type="submit" fullWidth variant="contained" color="success">
               Register
             </Button>
             <Button
               fullWidth
               variant="contained"
-              color="secondary"
+              sx={{ backgroundColor: "#F3D1B4", color: "black" }}
               onClick={() => setShowSignUp(false)}
             >
               Login
             </Button>
           </Box>
         </Box>
-      </Paper>
+      </LoginPopup>
     </Container>
   );
 };

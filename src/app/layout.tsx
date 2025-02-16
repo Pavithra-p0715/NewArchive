@@ -1,4 +1,4 @@
-import { AppBar } from "@mui/material";
+import { AppBar, Box } from "@mui/material";
 import Header from "./common/components/Header";
 import menuItems from "@/app/path.json";
 
@@ -16,10 +16,10 @@ export default function RootLayout({
     <>
       <html lang="en">
         <body>
-          <AppBar position="static" sx={{ backgroundColor: "#90EE90" }}>
+          <AppBar position="static" sx={{    backgroundColor: "#568D94",}}>
             <Header title="Keep Notes" menuItems={menuItems} />
           </AppBar>
-          {children}
+          <Box sx={{ backgroundColor: "#F4F2DE" }}>{children}</Box>
         </body>
       </html>
     </>
