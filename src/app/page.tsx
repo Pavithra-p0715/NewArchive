@@ -1,10 +1,8 @@
-import About from "../about";
+import React from "react";
+import LoginContiner from "@/app/portal/login/components/LoginContiner";
 
-export default function Home() {
-  return (
-    <>
-   <p>welcom Back Pavithra</p>
-   <About />
-   </>
-  );
+function page() {
+  return <LoginContiner />;
 }
+
+export default page;
