@@ -32,10 +32,7 @@ export default function About() {
       <nav className="flex justify-between items-center px-10 py-5 bg-black border-b border-gray-700">
         <h1 className="text-2xl font-bold text-green-400">Radar</h1>
         <ul className="hidden md:flex space-x-6">
-          <li>Home</li>
-          <li>About</li>
-          <li>Products</li>
-          <li>Contact</li>
+        
         </ul>
         {/* <div className="space-x-4">
           <Button variant="outline">Sign Up</Button>
