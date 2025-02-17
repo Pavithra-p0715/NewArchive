@@ -35,12 +35,10 @@ const About = () => {
   const [user, setUser] = useState<{ fullName: string } | null>(null);
   useEffect(() => {
     const storedUser = localStorage.getItem("activeUser");
-    console.log("Stored User:", storedUser);
 
     if (storedUser) {
       try {
         const parsedUser = JSON.parse(storedUser);
-        console.log("Parsed User:", parsedUser);
 
         if (parsedUser && parsedUser.fullName) {
           setUser(parsedUser);
