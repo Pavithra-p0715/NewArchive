@@ -32,7 +32,7 @@ const About = () => {
     setState,
     onMessage: setMessage as React.Dispatch<React.SetStateAction<string>>,
   });
-  const [user, setUser] = useState<{ email: string } | null>(null);
+  const [user, setUser] = useState<{ fullName: string } | null>(null);
   useEffect(() => {
     const storedUser = localStorage.getItem("activeUser");
     console.log("Stored User:", storedUser);
@@ -42,7 +42,7 @@ const About = () => {
         const parsedUser = JSON.parse(storedUser);
         console.log("Parsed User:", parsedUser);
 
-        if (parsedUser && parsedUser.email) {
+        if (parsedUser && parsedUser.fullName) {
           setUser(parsedUser);
         } else {
           console.warn("User object does not contain an email property.");
@@ -57,7 +57,7 @@ const About = () => {
     <>
       <Container sx={{ paddingTop: "16px" }}>
         <Typography variant="h5" fontWeight="bold" sx={{ mb: 2 }}>
-          {user ? `Good Morning: ${user.email}` : "Guest User"}
+          {user ? `Good Morning: ${user.fullName}` : "Guest User"}
         </Typography>
         {state.notes.length > 0 ? (
           <Box>
